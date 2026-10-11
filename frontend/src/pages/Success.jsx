@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { clearCart } from "../features/cart/cartSlice";
 import { verifyOrder } from "../features/Orders/orderThunk";
 import ContentLoader from "../ui/ContentLoader";
+import { clearCart } from "../features/Cart/cartSlice";
 
 const Success = () => {
 	const dispatch = useDispatch();
