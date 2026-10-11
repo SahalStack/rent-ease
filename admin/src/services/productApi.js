@@ -1,24 +1,19 @@
-import axios from "axios";
+import api from "./api";
 
 export const fetchAllProducts = async (signal) => {
 	try {
-		const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/products`, { signal });
-		const data = await response.json();
+		const { data } = await api.get("/products", { signal });
 		return data.products;
 	} catch (err) {
 		console.error("Error fetching products:", err);
 		throw err;
 	}
-}
+};
 
 export const addProduct = async (formData) => {
 	try {
-		const response = await axios.post(
-			`${import.meta.env.VITE_API_BASE_URL}/products`,
-			formData
-		);
-
-		return response.data.product;
+		const { data } = await api.post("/products", formData);
+		return data.product;
 	} catch (err) {
 		console.error("Error adding product:", err);
 		throw err;
@@ -27,15 +22,10 @@ export const addProduct = async (formData) => {
 
 export const updateProduct = async (id, formData) => {
 	try {
-		const response = await axios.put(
-			`${import.meta.env.VITE_API_BASE_URL}/products/${id}`,
-			formData
-		);
-
-		return response.data.product;
+		const { data } = await api.put(`/products/${id}`, formData);
+		return data.product;
 	} catch (err) {
 		console.error("Error updating product data:", err);
 		throw err;
 	}
 };
-
