@@ -488,7 +488,7 @@ export const categories = [
 		slug: "bedroom",
 		description: "Premium mattresses, bed frames, and bedside essentials.",
 		quantity: "86",
-		image: './images/bedroom.png',
+		image: '/images/bedroom.png',
 	},
 	{
 		id: 2,
@@ -497,7 +497,7 @@ export const categories = [
 		slug: "dining",
 		description: "Elegant dining sets and contemporary bar seating.",
 		quantity: "52",
-		image: './images/dining.png',
+		image: '/images/dining.png',
 	},
 	{
 		id: 3,
@@ -506,7 +506,7 @@ export const categories = [
 		slug: "office",
 		description: "Ergonomic chairs and modular desks for productivity.",
 		quantity: "74",
-		image: './images/office.png',
+		image: '/images/office.png',
 	},
 	{
 		id: 4,
@@ -515,7 +515,7 @@ export const categories = [
 		slug: "living-room",
 		description: "Designer sofas, coffee tables, and entertainment units.",
 		quantity: "24",
-		image: './images/living.png',
+		image: '/images/living.png',
 	},
 	{
 		id: 5,
@@ -524,7 +524,7 @@ export const categories = [
 		slug: "appliances",
 		description: "Smart refrigerators, washing machines, and HVAC units.",
 		quantity: "45",
-		image: './images/appliances.png',
+		image: '/images/appliances.png',
 	},
 	{
 		id: 6,
@@ -533,7 +533,7 @@ export const categories = [
 		slug: "kitchen",
 		description: "Countertop appliances and complete cookware sets.",
 		quantity: "98",
-		image: './images/kitchen.png',
+		image: '/images/kitchen.png',
 	},
 	{
 		id: 7,
@@ -542,7 +542,7 @@ export const categories = [
 		slug: "electronics",
 		description: "Latest smart TVs, sound systems, and home automation.",
 		quantity: "32",
-		image: './images/electronics.png',
+		image: '/images/electronics.png',
 	},
 	{
 		id: 8,
@@ -551,7 +551,7 @@ export const categories = [
 		slug: "study",
 		description: "Bookshelves, study lamps, and organized storage.",
 		quantity: "41",
-		image: './images/study.png',
+		image: '/images/study.png',
 	},
 ];
 
