@@ -1,0 +1,4 @@
+// services/authToken.js
+let accessToken = null;
+export const setAccessToken = (t) => { accessToken = t; };
+export const getAccessToken = () => accessToken;

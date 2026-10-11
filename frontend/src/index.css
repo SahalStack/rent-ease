@@ -1,0 +1,147 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+body {
+  background-color: #f9faf8;
+  font-family: "Outfit", sans-serif;
+  color: #191c1b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.card-shadow {
+  box-shadow: 0px 4px 20px rgba(67, 118, 108, 0.08);
+}
+
+.card-hover {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 12px 32px rgba(118, 69, 59, 0.12);
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 300,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.material-filled {
+  font-variation-settings:
+    "FILL" 1,
+    "wght" 300,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.phonepay-overlay {
+  position: fixed;
+  inset: 0;
+  background: #1d9e75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: overlayExit 0.5s ease-in 1.2s forwards;
+}
+
+.ripple {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+.r1 {
+  animation: ripple 1s ease-out 0.1s forwards;
+}
+.r2 {
+  animation: ripple 1s ease-out 0.35s forwards;
+}
+
+.check-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.check-path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: checkDraw 0.4s ease-out 0.5s forwards;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+@keyframes overlayExit {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes checkDraw {
+  0% {
+    stroke-dashoffset: 60;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.status-badge-pending {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.status-badge-active {
+  background-color: #10b981;
+  color: white;
+}
+
+.status-badge-completed {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.home-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
