@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
-import registerImg from '../../images/register.png';
 import Button from '../ui/Button';
 import InputBox from '../ui/InputBox';
 import { inputFields, passwordFields } from '../../data';
@@ -85,7 +84,7 @@ const Register = () => {
 				className="relative md:w-[40%] min-h-[40vh] md:min-h-screen overflow-hidden flex flex-col justify-end p-margin-desktop bg-surface-container-low">
 				<div className="absolute inset-0 z-0">
 					<img alt="Modern bedroom" className="w-full h-full object-cover grayscale-10 brightness-95"
-						src={registerImg} />
+						src="/images/register.png" />
 					<div className="absolute inset-0 bg-linear-to-t from-primary/60 via-transparent to-transparent"></div>
 				</div>
 				<div className="relative z-10 max-w-md animate-fade-in-up">

@@ -1,6 +1,4 @@
 import usePageTitle from "../hooks/usePageTitle"
-import about1 from '../../images/about1.png';
-import about2 from '../../images/about2.png';
 import { Link } from "react-router-dom";
 
 const About = () => {
@@ -36,7 +34,7 @@ const About = () => {
 						</div>
 						<img alt=""
 							className="w-full h-auto object-cover rounded-xl luxury-shadow aspect-2/3 md:max-h-175 mx-auto"
-							src={about1} />
+							src="/images/about1.png" />
 					</div>
 				</div>
 			</section>
@@ -45,7 +43,7 @@ const About = () => {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-gutter md:gap-section-padding items-center">
 						<div className="order-2 md:order-1">
 							<img alt="" className="w-full h-auto object-cover rounded-xl luxury-shadow aspect-[1.79]"
-								src={about2} />
+								src="/images/about2.png" />
 						</div>
 						<div className="order-1 md:order-2 flex flex-col gap-stack-md">
 							<h2 className="font-headline-md text-headline-md text-on-surface">Our Story</h2>

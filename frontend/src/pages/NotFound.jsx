@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import notFoundImg from "../../images/not-found.jpg";
 import usePageTitle from "../hooks/usePageTitle";
 
 const NotFound = () => {
@@ -9,7 +8,7 @@ const NotFound = () => {
 		<main className="pt-30 pb-section-padding px-margin-mobile md:px-margin-desktop max-w-2xl mx-auto flex flex-col items-center text-center">
 			<div className="mb-stack-md animate-in fade-in zoom-in duration-700">
 				<img
-					src={notFoundImg}
+					src="/images/not-found.jpg"
 					alt="Empty armchair"
 					className="w-24 h-24 object-contain mx-auto opacity-80"
 				/>

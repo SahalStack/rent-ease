@@ -1,4 +1,3 @@
-import teleIcon from '../../images/teleIcon.png';
 import usePageTitle from '../hooks/usePageTitle';
 
 const ContactUs = () => {
@@ -16,7 +15,7 @@ const ContactUs = () => {
 				</p>
 			</header>
 			<div className="flex justify-center py-unit">
-				<img alt="Minimalist telephone icon" className="w-32 h-32 md:w-40 md:h-40 opacity-90 transition-transform duration-500 hover:scale-105" src={teleIcon} />
+				<img alt="Minimalist telephone icon" className="w-32 h-32 md:w-40 md:h-40 opacity-90 transition-transform duration-500 hover:scale-105" src="/images/teleIcon.png" />
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
 				<div className="text-center space-y-2 p-6 rounded-xl hover:bg-surface-container-low transition-colors duration-300">

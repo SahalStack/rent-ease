@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { login } from '../features/auth/authThunk'
-import loginImg from '../../images/login.png'
 import Button from '../ui/Button'
 import usePageTitle from '../hooks/usePageTitle'
 import { validateLoginForm } from '../utils/validators'
@@ -81,7 +80,7 @@ const Login = () => {
 				<div className="absolute inset-0 z-0">
 					<img alt="Premium interior space"
 						className="w-full h-full object-cover"
-						src={loginImg} />
+						src="/images/login.png" />
 				</div>
 				<div
 					className="absolute inset-0 bg-primary/20 flex flex-col justify-end p-margin-desktop md:p-section-padding pb-30 md:pb-20 z-10 text-white">

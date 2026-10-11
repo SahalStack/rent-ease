@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import hero from '../../../images/hero.jpg'
 
 const Hero = () => {
 	return (
@@ -43,7 +42,7 @@ const Hero = () => {
 						<img
 							alt="Premium minimalist living room"
 							className="w-full h-full object-cover"
-							src={hero}
+							src="/images/hero.jpg"
 							loading="eager"
 							fetchPriority="high"
 							decoding="async"
