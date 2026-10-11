@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:3000/api/payments";
+const API_URL = `${import.meta.env.VITE_API_BASE_URL}/payments`;
 
 export const createCheckoutSession = async (orderData, token) => {
 	try {

@@ -1,30 +1,23 @@
 import api from "./api";
-import toast from "react-hot-toast";
-
-const API_URL = "http://localhost:3000/api";
 
 export async function loginUser(credentials) {
 	try {
-		const { data } = await api.post(`${API_URL}/auth/login`, credentials);
+		const { data } = await api.post("/auth/login", credentials);
 		return data;
 	} catch (error) {
-		const message = error.response?.data?.message || "Invalid email or password";
-		console.log('error::::', error.response?.data?.message)
+		const message =
+			error.response?.data?.message || error.message || "Login failed";
 		throw new Error(message, { cause: error });
 	}
 }
 
 export async function registerUser(userData) {
 	try {
-		const { data } = await api.post(
-			`${API_URL}/auth/register`,
-			userData
-		);
+		const { data } = await api.post("/auth/register", userData);
 		return data;
 	} catch (error) {
-		console.log('API error:', error.response.data);
-		toast.error(error.response.data.message)
-		const message = error.response?.data?.message || "Registration failed";
+		const message =
+			error.response?.data?.message || error.message || "Registration failed";
 		throw new Error(message, { cause: error });
 	}
 }
