@@ -1,8 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { setAccessToken } from "../services/api";
-
-const API = import.meta.env.VITE_API_BASE_URL;
+import api, { setAccessToken } from "../services/api";
 
 const AuthContext = createContext(null);
 
@@ -15,9 +12,7 @@ export const AuthProvider = ({ children }) => {
 	useEffect(() => {
 		const restore = async () => {
 			try {
-				const { data } = await axios.post(
-					`${API}/auth/refresh`, {}, { withCredentials: true }
-				);
+				const { data } = await api.post("/auth/refresh");
 				if (data.user?.role === "admin") {
 					setUser(data.user);
 					setToken(data.accessToken);

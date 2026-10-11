@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import api from "../services/api";
 
 const Login = () => {
 	const { login } = useAuth();
@@ -20,11 +20,7 @@ const Login = () => {
 
 		try {
 			setLoading(true);
-			const { data } = await axios.post(
-				`${import.meta.env.VITE_API_BASE_URL}/auth/login`,
-				{ email, password },
-				{ withCredentials: true }
-			);
+			const { data } = await api.post("/auth/login", { email, password });
 
 			if (data.user.role !== "admin") {
 				return toast.error("Admin access only");
