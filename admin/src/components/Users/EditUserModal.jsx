@@ -20,13 +20,11 @@ const EditUserModal = ({ isOpen, user, onClose, refreshUsers, changeUserStatus }
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			// eslint-disable-next-line no-unused-vars
-			const updatedUser = await changeUserStatus(user._id, form.status);
+			await changeUserStatus(user._id, form.status);
 			await refreshUsers();
 			onClose();
 		} catch (error) {
 			toast.error(error.message);
-			console.log(error);
 		}
 	};
 

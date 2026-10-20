@@ -9,7 +9,6 @@ const useCheckout = () => {
 	const navigate = useNavigate();
 
 	const cartItems = useSelector((state) => state.cart.items);
-	console.log('cartitmes from checkout Page:', cartItems)
 	const { currentUser } = useSelector((state) => state.auth);
 	const { isLoading, error } = useSelector((state) => state.payment);
 

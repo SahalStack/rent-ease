@@ -14,7 +14,6 @@ const OrderDetails = () => {
 	const dispatch = useDispatch();
 
 	const { currentOrder, isLoading } = useSelector((state) => state.orders);
-	console.log('surrentorder from order details', currentOrder);
 
 	const duration = currentOrder?.order?.items?.[0]?.duration;
 	const deposit = currentOrder?.order?.items?.[0]?.securityDeposit;

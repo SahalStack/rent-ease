@@ -8,7 +8,6 @@ export const addReview = createAsyncThunk(
 			const data = await postReview(productId, reviewData);
 			return data.review;
 		} catch (error) {
-			console.log('error', error)
 			return rejectWithValue(error);
 		}
 	}

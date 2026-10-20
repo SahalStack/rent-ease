@@ -27,7 +27,6 @@ const Cart = () => {
 	usePageTitle("Shopping Cart");
 
 	const cartItems = useSelector(state => state.cart.items);
-	console.log(cartItems)
 
 	const { isAuthenticated } = useSelector((state) => state.auth);
 	const { promoApplied, discount, promoError, promoCode } = useSelector(state => state.cart);

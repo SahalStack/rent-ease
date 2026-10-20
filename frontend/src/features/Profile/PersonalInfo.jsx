@@ -5,7 +5,6 @@ import { updateProfile } from "../auth/authThunk";
 
 const PersonalInfo = () => {
 	const { currentUser } = useSelector((state) => state.auth);
-	console.log('current user from profile:',currentUser)
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const dispatch = useDispatch();

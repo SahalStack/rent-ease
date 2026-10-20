@@ -47,7 +47,6 @@ const Login = () => {
 			const resultAction = await dispatch(login(formData));
 
 			if (login.fulfilled.match(resultAction)) {
-				console.log(resultAction.payload);
 				toast.success('Login Successful');
 				setFormData({
 					email: '',
@@ -59,7 +58,6 @@ const Login = () => {
 				toast.error(resultAction.payload || "Login failed");
 			}
 		} catch (error) {
-			console.log(error);
 			toast.error(error.message);
 		}
 	}

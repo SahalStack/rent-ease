@@ -6,7 +6,6 @@ import { updateAddress } from "../auth/authThunk";
 const AddressInfo = () => {
 
 	const { currentUser } = useSelector((state) => state.auth);
-	console.log(currentUser)
 	const hasAddress = !!currentUser?.address?.fullAddress;
 
 	const dispatch = useDispatch();
