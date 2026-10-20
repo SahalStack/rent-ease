@@ -8,6 +8,7 @@ import {
 	updateProfileApi,
 } from "../../services/authApiService";
 import { setAccessToken } from "../../services/authToken";
+import { getErrorMessage } from "../../utils/getErrorMessage";
 
 // Login
 export const login = createAsyncThunk(
@@ -18,7 +19,7 @@ export const login = createAsyncThunk(
 			setAccessToken(data.accessToken);
 			return data;
 		} catch (err) {
-			return rejectWithValue(err.message);
+			return rejectWithValue(getErrorMessage(err));
 		}
 	}
 );
@@ -32,8 +33,7 @@ export const register = createAsyncThunk(
 			setAccessToken(data.accessToken);
 			return data;
 		} catch (err) {
-			toast.error(err.message);
-			return rejectWithValue(err.message);
+			return rejectWithValue(getErrorMessage(err));
 		}
 	}
 );

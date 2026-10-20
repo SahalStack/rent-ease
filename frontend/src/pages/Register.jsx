@@ -62,6 +62,9 @@ const Register = () => {
 				});
 				navigate("/login");
 			}
+			else if (register.rejected.match(resultAction)) {
+				toast.error(resultAction.payload || "Registration failed");
+			}
 		} catch (error) {
 			toast.error(error.message);
 		}
