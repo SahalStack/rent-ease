@@ -64,8 +64,10 @@ const login = asyncHandler(async (req, res) => {
 
 	//1.check if the user exist,
 	const user = await User.findOne({ email }).select("+password");
-	logger.warn({ email }, "Login failed: user not found");
-	if (!user) throw new AppError('Invalid email or password', 400);
+	if (!user) {
+		logger.warn({ email }, "Login failed: user not found");
+		throw new AppError('Invalid email or password', 400);
+	}
 
 	//2.if user(email exist),compare password
 	const isMatch = await bcrypt.compare(password, user.password);
