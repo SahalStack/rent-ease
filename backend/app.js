@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import rateLimit from 'express-rate-limit'
 import helmet from "helmet";
 import morgan from 'morgan';
-import mongoSanitize from "express-mongo-sanitize";
+import mongoSanitize from "@exortek/express-mongo-sanitize";
 import pinoHttp from "pino-http";
 
 // file importing
