@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== "production") {
 dns.setDefaultResultOrder("ipv4first");
 
 const PORT = process.env.PORT || 3001;
+const HOST = "0.0.0.0";
 let server;
 
 process.on("unhandledRejection", (err) => {
@@ -24,8 +25,8 @@ process.on("unhandledRejection", (err) => {
 const startServer = async () => {
 	try {
 		await connectDb();
-		server = app.listen(PORT, () => {
-			console.log(`Server running on port ${PORT}`);
+		server = app.listen(PORT, HOST, () => {
+			console.log(`Server listening on ${HOST}:${PORT}`);
 		});
 	} catch (error) {
 		console.log(error);
