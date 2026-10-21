@@ -1,13 +1,20 @@
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { statusButtons } from '../../../data';
-import { useDispatch } from 'react-redux';
-import { cancelOrder, fetchOrders } from './orderThunk';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { statusButtons } from "../../../data";
+import ConfirmDialog from "../../ui/ConfirmDialog";
+import { cancelOrder } from "./orderThunk";
+import { selectCancellingOrderId } from "./orderSelectors";
 
 const OrderCard = ({ order, item }) => {
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	const [isCancelDialogOpen, setIsCancelDialogOpen] = useState(false);
+
+	const cancellingOrderId = useSelector(selectCancellingOrderId);
+	const isCancelling = cancellingOrderId === order._id;
 
 	const {
 		name,
@@ -43,26 +50,24 @@ const OrderCard = ({ order, item }) => {
 		});
 	};
 
-	const handleAction = async (action) => {
+	const handleAction = (action) => {
 		if (action === "view") navigate(`/orders/${order._id}`);
-		if (action === "cancel") {
-			try {
-				await dispatch(cancelOrder(order._id)).unwrap();
-				toast.success("Order cancelled successfully");
-
-				// Remove this if your Redux slice updates the order automatically.
-				dispatch(fetchOrders());
-			} catch (error) {
-				toast.error(error || "Failed to cancel order");
-			}
-			return;
-		}
-
-		if (action === "extend") navigate(`/orders/${order.id}/extend`);
-		if (action === "maintenance") navigate(`/orders/${order.id}/maintenance`);
-		if (action === "report") navigate(`/orders/${order.id}/report`);
-		if (action === "return") navigate(`/orders/${order.id}/return`);
+		if (action === "cancel") setIsCancelDialogOpen(true);
+		if (action === "extend") navigate(`/orders/${order._id}/extend`);
+		if (action === "maintenance") navigate(`/orders/${order._id}/maintenance`);
+		if (action === "report") navigate(`/orders/${order._id}/report`);
+		if (action === "return") navigate(`/orders/${order._id}/return`);
 		if (action === "rentAgain") navigate(`/products/${item.productId}`);
+	};
+
+	const handleConfirmCancel = async () => {
+		try {
+			await dispatch(cancelOrder(order._id)).unwrap();
+			toast.success("Order cancelled successfully");
+			setIsCancelDialogOpen(false);
+		} catch (error) {
+			toast.error(error || "Failed to cancel order");
+		}
 	};
 
 	return (
@@ -126,6 +131,17 @@ const OrderCard = ({ order, item }) => {
 					</button>
 				))}
 			</div>
+
+			<ConfirmDialog
+				isOpen={isCancelDialogOpen}
+				title="Cancel this order?"
+				message={`Are you sure you want to cancel "${name}"? The rental will be cancelled and this action cannot be undone.`}
+				confirmLabel="Yes, cancel order"
+				cancelLabel="Keep order"
+				isLoading={isCancelling}
+				onConfirm={handleConfirmCancel}
+				onClose={() => setIsCancelDialogOpen(false)}
+			/>
 		</div>
 	);
 };

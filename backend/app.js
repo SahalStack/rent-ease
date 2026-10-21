@@ -12,6 +12,7 @@ import authRouter from "./routes/authRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import paymentRouter from "./routes/paymentRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
+import adminOrderRouter from "./routes/adminOrderRoutes.js";
 import reviewRouter from "./routes/reviewRoutes.js";
 import dashboardRouter from "./routes/dashboardRoutes.js";
 
@@ -84,6 +85,7 @@ app.use('/api', limiter);
 app.use('/api/auth', authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/admin/orders", adminOrderRouter);
 app.use("/api/payments", paymentRouter);
 app.use("/api/reviews", reviewRouter);
 app.use("/api/dashboard", dashboardRouter);

@@ -3,7 +3,7 @@ import { formatDate, paymentStyles, statusStyles } from "../../helper"
 const OrderRow = ({ order }) => {
 	return (
 		<tr key={order._id} className="border-b border-gray-100 hover:bg-gray-50">
-			<td className="py-3 px-4 font-medium">#{order.id.slice(-5).toUpperCase()}</td>
+			<td className="py-3 px-4 font-medium">#{order._id.slice(-5).toUpperCase()}</td>
 			<td className="py-3 px-4">{order.user.full_name}</td>
 			<td className="py-3 px-4">
 				{order.items.map((item) => item.name).join(", ")}

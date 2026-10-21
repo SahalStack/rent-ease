@@ -5,8 +5,8 @@ import AppLayout from "./ui/AppLayout";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 import PageLoader from "./ui/PageLoader";
+import ErrorBoundary from "./ui/ErrorBoundary";
 import Success from "./pages/Success";
-import OrderDetails from "./pages/OrderDetails";
 
 // Lazy loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -18,6 +18,7 @@ const Categories = lazy(() => import("./pages/Categories"));
 const Cart = lazy(() => import("./pages/Cart"));
 const CheckOut = lazy(() => import("./pages/CheckOut"));
 const Orders = lazy(() => import("./pages/Orders"));
+const OrderDetails = lazy(() => import("./pages/OrderDetails"));
 const About = lazy(() => import("./pages/About"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -27,8 +28,9 @@ function App() {
   return (
     <BrowserRouter>
       <Toaster position="top-right" reverseOrder={false} />
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
+      <ErrorBoundary>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
           <Route element={<AppLayout />}>
 
             {/* Guests only */}
@@ -60,7 +62,8 @@ function App() {
 
           </Route>
         </Routes>
-      </Suspense>
+        </Suspense>
+      </ErrorBoundary>
     </BrowserRouter>
   );
 }

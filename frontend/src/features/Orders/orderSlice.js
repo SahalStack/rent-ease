@@ -14,8 +14,18 @@ const initialState = {
 	statusFilter: "all",
 	sortBy: "newest",
 	isLoading: false,
+	isDetailsLoading: false,
+	cancellingOrderId: null,
 	error: null,
 };
+
+// Stats always describe every order the customer owns, not the filtered subset.
+const computeStats = (orders) => ({
+	activeRentals: orders.filter((order) => order.orderStatus === "active").length,
+	pendingOrders: orders.filter((order) => order.orderStatus === "pending").length,
+	completedRentals: orders.filter((order) => order.orderStatus === "completed").length,
+	totalSpent: orders.reduce((sum, order) => sum + (order.totalAmount || 0), 0),
+});
 
 const orderSlice = createSlice({
 	name: "orders",
@@ -26,10 +36,10 @@ const orderSlice = createSlice({
 			state.searchQuery = action.payload;
 		},
 		setStatusFilter(state, action) {
-			state.statusFilter = action.payload; // "all" | "active" | "pending" | "completed"
+			state.statusFilter = action.payload;
 		},
 		setSortBy(state, action) {
-			state.sortBy = action.payload; // "newest" | "oldest" | "price-high" | "price-low"
+			state.sortBy = action.payload;
 		},
 		resetFilters(state) {
 			state.searchQuery = "";
@@ -40,27 +50,17 @@ const orderSlice = createSlice({
 
 	extraReducers: (builder) => {
 		builder
-			// Pending: loading started
 			.addCase(fetchOrders.pending, (state) => {
-				console.log('fetching orderss....')
 				state.isLoading = true;
 				state.error = null;
 			})
 
-			// Fulfilled: data received
 			.addCase(fetchOrders.fulfilled, (state, action) => {
-				console.log("payload:", action.payload);
 				state.isLoading = false;
 				state.orders = action.payload;
-				const orders = action.payload;
-
-				state.stats.activeRentals = orders.filter((o) => o.orderStatus === "active").length;
-				state.stats.pendingOrders = orders.filter((o) => o.orderStatus === "pending").length;
-				state.stats.completedRentals = orders.filter((o) => o.orderStatus === "returned").length;
-				state.stats.totalSpent = orders.reduce((sum, o) => sum + (o.totalAmount || 0), 0);
+				state.stats = computeStats(action.payload);
 			})
 
-			// Rejected: something went wrong
 			.addCase(fetchOrders.rejected, (state, action) => {
 				state.isLoading = false;
 				state.error = action.payload;
@@ -72,10 +72,8 @@ const orderSlice = createSlice({
 			})
 			.addCase(createOrder.fulfilled, (state, action) => {
 				state.isLoading = false;
-				// Add newly created order
 				state.orders.unshift(action.payload.order);
-				state.stats.pendingOrders += 1;
-				state.stats.totalSpent += action.payload.order.totalAmount;
+				state.stats = computeStats(state.orders);
 			})
 			.addCase(createOrder.rejected, (state, action) => {
 				state.isLoading = false;
@@ -95,41 +93,43 @@ const orderSlice = createSlice({
 				state.error = action.payload;
 			})
 
-			.addCase(cancelOrder.pending, (state) => {
-				state.isLoading = true;
+			.addCase(cancelOrder.pending, (state, action) => {
+				state.cancellingOrderId = action.meta.arg;
 				state.error = null;
 			})
 			.addCase(cancelOrder.fulfilled, (state, action) => {
+				state.cancellingOrderId = null;
 				const updatedOrder = action.payload.order;
 
 				const index = state.orders.findIndex(
-					order => order._id === updatedOrder._id
+					(order) => order._id === updatedOrder._id
 				);
 
 				if (index !== -1) {
 					state.orders[index] = updatedOrder;
 				}
+
+				state.stats = computeStats(state.orders);
 			})
 			.addCase(cancelOrder.rejected, (state, action) => {
-				state.isLoading = false;
+				state.cancellingOrderId = null;
 				state.error = action.payload;
 			})
 
 			.addCase(fetchOrderById.pending, (state) => {
-				state.isLoading = true;
+				state.isDetailsLoading = true;
+				state.error = null;
 			})
-
 			.addCase(fetchOrderById.fulfilled, (state, action) => {
-				state.isLoading = false;
+				state.isDetailsLoading = false;
 				state.currentOrder = action.payload;
 			})
-
 			.addCase(fetchOrderById.rejected, (state, action) => {
-				state.isLoading = false;
+				state.isDetailsLoading = false;
 				state.error = action.payload;
-			})
+			});
 	},
-})
+});
 
 export const { setSearchQuery, setStatusFilter, setSortBy, resetFilters } = orderSlice.actions;
 export default orderSlice.reducer;

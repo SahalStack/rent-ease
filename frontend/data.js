@@ -716,11 +716,12 @@ export const statsData = [
 	},
 ];
 
+// Values must match the orderStatus enum of the backend order model.
 export const orderStatusOptions = [
 	{ value: "active", label: "Active" },
 	{ value: "pending", label: "Pending" },
-	{ value: "delivered", label: "Delivered" },
-	{ value: "returned", label: "Returned" },
+	{ value: "completed", label: "Completed" },
+	{ value: "cancelled", label: "Cancelled" },
 ];
 
 export const orderSortOptions = [
@@ -746,12 +747,12 @@ export const statusButtons = {
 		{ label: "Extend Rental", action: "extend", className: "bg-primary text-on-primary hover:bg-primary/90 shadow-sm" },
 		{ label: "View Details", action: "view", className: "text-primary border border-primary/20 hover:bg-primary/5" },
 	],
-	delivered: [
+	completed: [
 		{ label: "Report Missing Item", action: "report", className: "bg-red-50 text-red-500 border border-red-200 hover:bg-red-100" },
 		{ label: "Schedule Return", action: "return", className: "bg-primary text-on-primary hover:bg-primary/90 shadow-sm" },
 		{ label: "View Details", action: "view", className: "text-primary border border-primary/20 hover:bg-primary/5" },
 	],
-	returned: [
+	cancelled: [
 		{ label: "Rent Again", action: "rentAgain", className: "text-primary border border-primary/20 hover:bg-primary/5" },
 		{ label: "View Details", action: "view", className: "text-primary border border-primary/20 hover:bg-primary/5" },
 	],

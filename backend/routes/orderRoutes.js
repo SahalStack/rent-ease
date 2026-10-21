@@ -9,11 +9,12 @@ import verifyToken from "../middleware/verifyToken.js";
 
 const orderRouter = express.Router();
 
-// orderRouter.use(verifyToken);
+// Every order route acts on behalf of the signed-in customer.
+orderRouter.use(verifyToken);
 
 orderRouter.get("/", getUserOrders);
 orderRouter.get("/:id", getOrderById);
 orderRouter.post("/", createOrder);
-orderRouter.patch("/:id", cancelOrder);
+orderRouter.delete("/:id", cancelOrder);
 
 export default orderRouter;
