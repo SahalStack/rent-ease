@@ -18,7 +18,6 @@ export const postReview = async (productId, reviewData) => {
 		);
 		return response.data;
 	} catch (error) {
-		console.log("error", error);
 		throw error.response?.data?.message;
 	}
 };

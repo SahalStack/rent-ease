@@ -13,7 +13,6 @@ const useOrders = () => {
 				const data = await fetchAllOrders();
 				setOrders(data);
 			} catch (error) {
-				console.error(error);
 				setError(`Failed to load Orders: ${error.message}`);
 			} finally {
 				setIsLoading(false);

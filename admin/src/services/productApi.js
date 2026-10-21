@@ -5,7 +5,6 @@ export const fetchAllProducts = async (signal) => {
 		const { data } = await api.get("/products", { signal });
 		return data.products;
 	} catch (err) {
-		console.error("Error fetching products:", err);
 		throw err;
 	}
 };
@@ -15,7 +14,6 @@ export const addProduct = async (formData) => {
 		const { data } = await api.post("/products", formData);
 		return data.product;
 	} catch (err) {
-		console.error("Error adding product:", err);
 		throw err;
 	}
 };
@@ -25,7 +23,6 @@ export const updateProduct = async (id, formData) => {
 		const { data } = await api.put(`/products/${id}`, formData);
 		return data.product;
 	} catch (err) {
-		console.error("Error updating product data:", err);
 		throw err;
 	}
 };

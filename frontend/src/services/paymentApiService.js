@@ -15,7 +15,6 @@ export const createCheckoutSession = async (orderData, token) => {
 		return response.data;
 
 	} catch (error) {
-		console.log('error', error)
 		throw (error.response?.data?.message || error.message || "Failed to create checkout session");
 	}
 };

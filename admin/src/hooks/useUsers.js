@@ -49,7 +49,6 @@ const useUser = () => {
 			toast.success(response.message);
 			return response;
 		} catch (error) {
-			console.error("Update user failed:", error.response?.data?.message || error.message);
 			toast.error(error.response?.data?.message);
 		}
 	};
@@ -62,7 +61,6 @@ const useUser = () => {
 			);
 			toast.success(response.message);
 		} catch (error) {
-			console.error("Delete user failed:", error.response?.data?.message || error.message);
 			toast.error(error.response?.data?.message);
 		}
 	}

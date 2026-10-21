@@ -3,15 +3,11 @@ import { Component } from "react";
 class ErrorBoundary extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { hasError: false };
+		this.state = { hasError: false, message: "" };
 	}
 
-	static getDerivedStateFromError() {
-		return { hasError: true };
-	}
-
-	componentDidCatch(error, errorInfo) {
-		console.error("Unhandled UI error:", error, errorInfo);
+	static getDerivedStateFromError(error) {
+		return { hasError: true, message: error?.message || "Unexpected error" };
 	}
 
 	render() {
@@ -30,6 +26,12 @@ class ErrorBoundary extends Component {
 				<p className="text-body-md text-on-surface-variant mt-2 max-w-md">
 					This page could not be displayed. Reload the page to try again.
 				</p>
+
+				{this.state.message ? (
+					<p className="font-body-sm text-body-sm text-on-surface-variant mt-1 max-w-md break-words">
+						{this.state.message}
+					</p>
+				) : null}
 
 				<button
 					type="button"

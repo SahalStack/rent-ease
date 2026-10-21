@@ -53,7 +53,6 @@ const AddProductForm = () => {
 			setExtraImages([null, null, null, null]);
 			toast.success("Product added successfully!");
 		} catch (err) {
-			console.error("Failed to add product:", err);
 			toast.error(err.response?.data?.message || err.message || "Failed to add product");
 		}
 	};

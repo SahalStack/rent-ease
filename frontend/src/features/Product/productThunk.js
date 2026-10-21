@@ -16,7 +16,6 @@ export const fetchProducts = createAsyncThunk("products/fetchProducts", async (q
 export const fetchProductById = createAsyncThunk("products/fetchProductById", async (id, thunkAPI) => {
 	try {
 		const data = await getProductById(id);
-		console.log('data from API:', data);
 		return data;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.response?.data?.message || "Failed to fetch product"

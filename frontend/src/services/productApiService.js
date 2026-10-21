@@ -7,7 +7,6 @@ export const getProducts = async (query = "") => {
 		const response = await axios.get(`${API_URL}?${query}`);
 		return response.data.products;
 	} catch (error) {
-		console.log('error', error)
 		throw error.response?.data?.message
 	}
 };
@@ -17,7 +16,6 @@ export const getProductById = async (id) => {
 		const response = await axios.get(`${API_URL}/${id}`);
 		return response.data.product;
 	} catch (error) {
-		console.log('error:::', error)
 		throw (
 			error.response?.data?.message || error.message || "Failed to fetch product"
 		);
