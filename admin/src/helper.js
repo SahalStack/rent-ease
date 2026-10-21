@@ -55,3 +55,17 @@ export const formatDate = (date) => {
 		.replace(/\//g, "-");
 };
 
+// Orders whose customer was deleted come back with user: null,
+// so the customer column falls back to a placeholder.
+export const getCustomerName = (order) => order.user?.full_name || "Deleted user";
+
+export const getItemNames = (order) =>
+	Array.isArray(order.items) && order.items.length > 0
+		? order.items.map((item) => item.name).join(", ")
+		: "—";
+
+export const capitalize = (value) =>
+	typeof value === "string" && value.length > 0
+		? value.charAt(0).toUpperCase() + value.slice(1)
+		: "—";
+

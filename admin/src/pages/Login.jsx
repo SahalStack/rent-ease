@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 import api from "../services/api";
 
 const Login = () => {
@@ -22,7 +22,7 @@ const Login = () => {
 			setLoading(true);
 			const { data } = await api.post("/auth/login", { email, password });
 
-			if (data.user.role !== "admin") {
+			if (data.user?.role !== "admin") {
 				return toast.error("Admin access only");
 			}
 

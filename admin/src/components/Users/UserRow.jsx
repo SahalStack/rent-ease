@@ -4,9 +4,9 @@ const UserRow = ({ user, onEdit, removeUser }) => {
 
 	return (
 		<tr className="border-b border-gray-100 hover:bg-gray-50">
-			<td className="py-3 px-4 font-medium capitalize">{user.full_name}</td>
-			<td className="py-3 px-4">{user.email}</td>
-			<td className="py-3 px-4">+91 {user.phone}</td>
+			<td className="py-3 px-4 font-medium capitalize">{user?.full_name || "—"}</td>
+			<td className="py-3 px-4">{user?.email || "—"}</td>
+			<td className="py-3 px-4">{user?.phone ? `+91 ${user.phone}` : "—"}</td>
 			<td className="py-3 px-4 uppercase">{user.address?.city || "N/A"}</td>
 			<td className="py-3 px-4 capitalize" >
 				<span

@@ -16,14 +16,18 @@ if (process.env.NODE_ENV === "production") {
 	process.exit(1);
 }
 
+const seededEmails = users.map((user) => user.email);
+
+// Only the seeded accounts are touched, removing every user would
+// orphan the orders that reference them.
 const importUsers = async () => {
-	await User.deleteMany();
+	await User.deleteMany({ email: { $in: seededEmails } });
 	await User.create(users);
 	console.log("Users imported ✅");
 };
 
 const destroyUsers = async () => {
-	await User.deleteMany();
+	await User.deleteMany({ email: { $in: seededEmails } });
 	console.log("Users destroyed 🗑️");
 };
 
