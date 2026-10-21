@@ -9,10 +9,11 @@ import { inputFields, passwordFields } from '../../data';
 import usePageTitle from '../hooks/usePageTitle';
 import { validateRegisterForm } from '../utils/validators';
 import { register } from '../features/auth/authThunk';
+import { clearAuthError } from '../features/auth/authSlice';
 
 const Register = () => {
 	const [formError, setFormError] = useState("");
-	const { error, isLoading } = useSelector((state) => state.auth);
+	const { isLoading } = useSelector((state) => state.auth);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -28,10 +29,11 @@ const Register = () => {
 	});
 
 	useEffect(() => {
-		if (error) {
-			toast.error(error);
-		}
-	}, [error]);
+		dispatch(clearAuthError());
+		return () => {
+			dispatch(clearAuthError());
+		};
+	}, [dispatch]);
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.id]: e.target.value });

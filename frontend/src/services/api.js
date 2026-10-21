@@ -3,6 +3,7 @@ import { getAccessToken } from "./authToken";
 
 const api = axios.create({
 	baseURL: import.meta.env.VITE_API_BASE_URL,
+	timeout: 60000,
 	withCredentials: true,
 });
 

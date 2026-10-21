@@ -50,10 +50,19 @@ if (process.env.NODE_ENV !== 'production') {
 	app.use(morgan('dev'));
 }
 
-const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL].filter(Boolean);
+const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL]
+	.filter(Boolean)
+	.map((url) => url.replace(/\/+$/, ""));
 
 app.use(cors({
-	origin: allowedOrigins,
+	origin: (origin, callback) => {
+		if (!origin) return callback(null, true);
+		const normalized = origin.replace(/\/+$/, "");
+		if (allowedOrigins.includes(normalized)) {
+			return callback(null, true);
+		}
+		return callback(new Error(`Origin ${origin} not allowed by CORS`));
+	},
 	credentials: true,
 	methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 	allowedHeaders: ["Content-Type", "Authorization"],

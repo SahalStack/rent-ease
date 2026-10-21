@@ -6,8 +6,15 @@ export async function loginUser(credentials) {
 		return data;
 	} catch (error) {
 		const message =
-			error.response?.data?.message || error.message || "Login failed";
-		throw new Error(message, { cause: error });
+			error.response?.data?.message ||
+			error.response?.data?.errors?.[0]?.msg ||
+			error.message ||
+			"Login failed";
+		const customError = new Error(message, { cause: error });
+		customError.response = error.response;
+		customError.request = error.request;
+		customError.code = error.code;
+		throw customError;
 	}
 }
 
@@ -17,8 +24,15 @@ export async function registerUser(userData) {
 		return data;
 	} catch (error) {
 		const message =
-			error.response?.data?.message || error.message || "Registration failed";
-		throw new Error(message, { cause: error });
+			error.response?.data?.message ||
+			error.response?.data?.errors?.[0]?.msg ||
+			error.message ||
+			"Registration failed";
+		const customError = new Error(message, { cause: error });
+		customError.response = error.response;
+		customError.request = error.request;
+		customError.code = error.code;
+		throw customError;
 	}
 }
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { login } from '../features/auth/authThunk'
+import { clearAuthError } from '../features/auth/authSlice'
 import Button from '../ui/Button'
 import usePageTitle from '../hooks/usePageTitle'
 import { validateLoginForm } from '../utils/validators'
@@ -10,7 +11,7 @@ import toast from 'react-hot-toast'
 import InputBox from '../ui/InputBox'
 
 const Login = () => {
-	const { error } = useSelector((state) => state.auth);
+	const { isLoading } = useSelector((state) => state.auth);
 	const [formError, setFormError] = useState("");
 
 	usePageTitle('Login');
@@ -24,10 +25,11 @@ const Login = () => {
 	});
 
 	useEffect(() => {
-		if (error) {
-			toast.error(error);
-		}
-	}, [error]);
+		dispatch(clearAuthError());
+		return () => {
+			dispatch(clearAuthError());
+		};
+	}, [dispatch]);
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -143,7 +145,10 @@ const Login = () => {
 								href="#">Forgot Password?</a>
 						</div>
 
-						<Button label='Login' />
+						<Button
+							label={isLoading ? "Logging in..." : "Login"}
+							disabled={isLoading}
+						/>
 
 						<div className="relative flex items-center py-stack-sm">
 							<div className="grow border-t border-outline-variant"></div>

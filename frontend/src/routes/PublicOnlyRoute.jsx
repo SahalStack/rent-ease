@@ -1,12 +1,14 @@
-import { Navigate, Outlet } from "react-router-dom"
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PublicOnlyRoute = () => {
-	const token = localStorage.getItem('token');
+	const { isAuthenticated } = useSelector((state) => state.auth);
+	const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-	// If token exists → send to home, block login/register
-	if (token) return <Navigate to='/' replace />
+	// If logged in → send to home, block login/register
+	if (isAuthenticated || token) return <Navigate to="/" replace />;
 
 	return <Outlet />;
-}
+};
 
 export default PublicOnlyRoute;

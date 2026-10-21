@@ -30,7 +30,6 @@ export const register = createAsyncThunk(
 	async (userData, { rejectWithValue }) => {
 		try {
 			const data = await registerUser(userData);
-			setAccessToken(data.accessToken);
 			return data;
 		} catch (err) {
 			return rejectWithValue(getErrorMessage(err));

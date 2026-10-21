@@ -50,7 +50,7 @@ export const validatePincode = (pincode) => {
 // validate entire login form at once
 export const validateLoginForm = ({ email, password }) => {
 	if (validateEmail(email)) return validateEmail(email);
-	if (validatePassword(password)) return validatePassword(password);
+	if (!password || !password.trim()) return "Password is required";
 	return "";
 };
 
