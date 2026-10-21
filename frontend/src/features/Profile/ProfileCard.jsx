@@ -3,6 +3,9 @@ import { useSelector } from "react-redux"
 const ProfileCard = () => {
 	const { currentUser } = useSelector((state) => state.auth);
 
+	// The session can end while the page is open, currentUser is then null.
+	if (!currentUser) return null;
+
 	return (
 		<div className="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0px_4px_20px_rgba(67,118,108,0.08)] text-center">
 			<div className="relative w-24 h-24 mx-auto mb-stack-sm">

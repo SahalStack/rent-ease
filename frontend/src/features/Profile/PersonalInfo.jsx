@@ -9,6 +9,9 @@ const PersonalInfo = () => {
 
 	const dispatch = useDispatch();
 
+	// The session can end while the page is open, currentUser is then null.
+	if (!currentUser) return null;
+
 	return (
 		<section
 			className="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0px_4px_20px_rgba(67,118,108,0.08)] flex flex-col justify-between">
