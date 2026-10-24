@@ -716,7 +716,6 @@ export const statsData = [
 	},
 ];
 
-// Values must match the orderStatus enum of the backend order model.
 export const orderStatusOptions = [
 	{ value: "active", label: "Active" },
 	{ value: "pending", label: "Pending" },
